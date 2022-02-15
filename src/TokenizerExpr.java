@@ -22,7 +22,7 @@ public class TokenizerExpr implements Tokenizer{
                 s.append(c);
                 pos++;
             }
-            else if (c == '+' || c == '(' || c == ')' || c == '*' || c == '/' || c == '%') {
+            else if (c == '+' || c == '(' || c == ')' || c == '*' || c == '/' || c == '%' || c == '^') {
                 s.append(c);
                 pos++;
             } else throw new SyntaxError("Syntax Error");
@@ -41,6 +41,14 @@ public class TokenizerExpr implements Tokenizer{
             consume();
         }else
             throw new SyntaxError("Syntax Error");
+    }
+
+    public int getPos(){
+        return pos;
+    }
+
+    public int getLength(){
+        return src.length();
     }
 
     @Override
