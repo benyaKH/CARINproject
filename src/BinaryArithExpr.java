@@ -29,4 +29,13 @@ public class BinaryArithExpr implements Expr{
         }
         throw new EvalError("Unknown op: " + op);
     }
+
+    @Override
+    public void prettyPrint(StringBuilder s) {
+        s.append("(");
+        left.prettyPrint(s);
+        s.append(op);
+        right.prettyPrint(s);
+        s.append(")");
+    }
 }

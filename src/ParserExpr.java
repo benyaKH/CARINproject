@@ -6,39 +6,38 @@ public class ParserExpr {
     }
 
     // SensorExpression → virus | antibody | nearby | Direction
-    public Expr SensorExpr() throws SyntaxError {
-        return null;
-    }
+    // public Expr SensorExpr() throws SyntaxError {
+    //     return null;
+    // }
 
     // P → n | identifier | ( E ) | SensorExpression  *** identifier
     public Expr parseP() throws SyntaxError {
         String peek = tkz.peek();
         if (isNumber(peek)) {
             return new IntForm(Integer.parseInt(tkz.consume()));
-        }else if(true){
-            return null;
-        }else if(peek.equals("(")){
+        }else {
             tkz.consume("(");
             Expr p = parseE();
             tkz.consume(")");
             return p;
-        }else{
-            Expr ss = SensorExpr();
-            return ss;
         }
+        // else{
+        //     Expr ss = SensorExpr();
+        //     return ss;
+        // }
     }
 
     // F → F ^ P | P
     public Expr parseF() throws SyntaxError {
-        Expr p = parseP();
+        Expr f = parseP();
         while (tkz.peek("^")) {
             String peek = tkz.peek();
             tkz.consume();
             switch (peek) {
-                case "^" -> p = new BinaryArithExpr(p, "^", parseP());
+                case "^" -> f = new BinaryArithExpr(f, "^", parseP());
             }
         }
-        return p;
+        return f;
     }
 
     // T → T * F | T / F | T % F | F
