@@ -8,4 +8,8 @@ public class IntForm implements Expr{
     public int eval() {
         return val;
     }
+
+    public void prettyPrint(StringBuilder s) {
+        s.append(val);
+    }
 }
