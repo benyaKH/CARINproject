@@ -4,31 +4,31 @@ public class Host {
     int MaxHP ;
     int HP ;
     int ATK ;
-    int[] position = new int[2];
+    int Xposition ,Yposition;
     public void getAttack(int dmg){
         this.HP  -= dmg ;
     }
     public void move(String direction){
         switch (direction) {
-            case "left" -> position[0]--;
-            case "right" -> position[0]++;
-            case "down" -> position[1]++;
-            case "up" -> position[1]--;
+            case "left" -> Xposition--;
+            case "right" -> Xposition++;
+            case "down" -> Yposition++;
+            case "up" -> Yposition--;
             case "upright" -> {
-                position[1]--;
-                position[0]++;
+                Yposition--;
+                Xposition++;
             }
             case "upleft" -> {
-                position[1]--;
-                position[1]--;
+                Yposition--;
+                Xposition--;
             }
             case "downright" -> {
-                position[1]++;
-                position[0]++;
+                Yposition++;
+                Xposition++;
             }
             case "downleft" -> {
-                position[1]++;
-                position[1]--;
+                Yposition++;
+                Xposition--;
             }
         }
     }
