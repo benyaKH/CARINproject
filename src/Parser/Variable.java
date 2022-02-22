@@ -3,14 +3,16 @@ import java.util.Map;
 
 public class Variable implements Expr{
     private String name;
+    private Map<String,Integer> data;
 
-    public Variable(String name) {
-    this.name = name;
+    public Variable(String name,Map<String,Integer> data) {
+        this.name = name;
+        this.data = data;
     }
 
-    public int eval( Map<String, Integer> bindings) {
-        if (bindings.containsKey(name))
-            return bindings.get(name);
+    public int eval() {
+        if (data.containsKey(name))
+            return data.get(name);
         throw new EvalError("undefined variable: " + name);
     }
     public void prettyPrint(StringBuilder s) {

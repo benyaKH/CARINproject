@@ -1,5 +1,4 @@
 package Parser;
-import java.util.Map;
 
 public class IntForm implements Expr{
     private final int val;
@@ -8,7 +7,7 @@ public class IntForm implements Expr{
         this.val = val;
     }
 
-    public int eval(Map<String, Integer> bindings) {
+    public int eval() {
         return val;
     }
 
