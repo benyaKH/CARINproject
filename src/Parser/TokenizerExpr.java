@@ -1,4 +1,7 @@
+package Parser;
+
 import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
 
 public class TokenizerExpr implements Tokenizer{
     private String src;
@@ -14,25 +17,20 @@ public class TokenizerExpr implements Tokenizer{
 
     private void computeNext() throws SyntaxError {
         StringBuilder s = new StringBuilder();
-        while (pos < src.length()) {
-            char c = src.charAt(pos);
-            if (Character.isDigit(c)) {  // start of number
+        StringTokenizer st = new StringTokenizer(src," ");
+        while (st.hasMoreTokens()) {
+            String c = st.nextToken();
+            if (isNumeric(c)) {  // start of number
                 s.append(c);
                 for (pos++; pos < src.length() && Character.isDigit(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
                 break;
-            } else if (Character.isLetter(c)) {  // start of string
+            } else if (c == "+" || c == "(" || c == ")" || c == "*" || c == "/" || c == "%" || c == "^") {
                 s.append(c);
-                pos++;
                 break;
-            }
-            else if (c == '+' || c == '(' || c == ')' || c == '*' || c == '/' || c == '%' || c == '^') {
-                s.append(c);
-                pos++;
-                break;
-            }else if(Character.isWhitespace(c)) // ignore whitespace
-                pos++;
-            else throw new SyntaxError("Unknown character: " + c);
+            }else if(c == "if" || c == "else" || c == "antibody" || c == "virus" || c == "move" || c == "shoot"){
+                s.append(c) ;
+            } else throw new SyntaxError("Unknown character: " + c);
         }
         next = s.toString();
 
@@ -56,6 +54,17 @@ public class TokenizerExpr implements Tokenizer{
 
     public int getLength(){
         return src.length();
+    }
+    public static boolean isNumeric(String strNum) {
+        if (strNum == null) {
+            return false;
+        }
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
     }
 
     @Override

@@ -1,4 +1,6 @@
-public class Antibody extends Host implement GeneticCode{
+package Model;
+
+public class Antibody extends Host{
     int AntibodyPlaceCost ;
     int AntibodyMoveCost ;
     public Antibody(int col, int row){

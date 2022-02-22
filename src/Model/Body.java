@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.Random;
 
 public class Body {
@@ -24,6 +26,13 @@ public class Body {
             }
         }
     }
+    public  void AddAntibody(int col,int row) throws SyntaxError {
+        if(col<6&&row<6){
+            map[col][row] = 2 ;
+            Antibodyleft++;
+        }else throw new SyntaxError("Wrong index") ;
+    }
+    //to see result in map
     public  void PrintMap(){
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -32,8 +41,8 @@ public class Body {
             System.out.println();
         }
     }
-
-    public static void main(String[] args) {
+    //test
+    public static void main(String[] args) throws SyntaxError {
         Body A = new Body();
         A.PrintMap();
         for(int i = 0;i<10;i++){
@@ -41,5 +50,9 @@ public class Body {
             A.PrintMap();
             System.out.println(A.Virusleft);
         }
+        A.AddAntibody(4,4);
+        A.PrintMap();
+        System.out.println("Model.Virus = "+A.Virusleft);
+        System.out.println("Model.Antibody = "+A.Antibodyleft);
     }
 }

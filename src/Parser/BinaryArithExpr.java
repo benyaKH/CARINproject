@@ -1,3 +1,5 @@
+package Parser;
+
 public class BinaryArithExpr implements Expr{
     private final Expr left;
     private final Expr right;

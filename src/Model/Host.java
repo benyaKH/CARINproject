@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.Random;
 
 public class Host {
@@ -36,6 +38,6 @@ public class Host {
         return (HP <= 0) ;
     }
     public void shoot(String direction){
-
+        
     }
 }

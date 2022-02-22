@@ -1,3 +1,5 @@
+package Parser;
+
 public class ParserExpr {
     private final TokenizerExpr tkz;
 
@@ -6,7 +8,7 @@ public class ParserExpr {
     }
 
     // SensorExpression → virus | antibody | nearby | Direction
-    // public Expr SensorExpr() throws SyntaxError {
+    // public Parser.Expr SensorExpr() throws Parser.SyntaxError {
     //     return null;
     // }
 
@@ -22,7 +24,7 @@ public class ParserExpr {
             return p;
         }
         // else{
-        //     Expr ss = SensorExpr();
+        //     Parser.Expr ss = SensorExpr();
         //     return ss;
         // }
     }
