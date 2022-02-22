@@ -1,5 +1,7 @@
 package Model;
 
+import Parser.SyntaxError;
+
 import java.util.Random;
 
 public class Body {
