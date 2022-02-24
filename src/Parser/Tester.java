@@ -8,8 +8,8 @@ public class Tester {
     @Test
     void normaltest(){
         System.out.println("normaltest");
-        String[] test = {"12 + 23 + 25 + 27","23 * ( 26 / 26 ) + 1","1 + 2 * 3 / 9","234 - 4 - 2 - 5 - 56","( ( 5 % 5 ) % 5 )","261200","2 ^ 3"};
-        int[] check = {87,24,1,167,0,261200,8};
+        String[] test = {"12 + 23 + 25 + 27","23 * ( 26 / 26 ) + 1","1 + 2 * 3 / 9","234 - 4 - 2 - 5 - 56","( ( 5 % 5 ) % 5 )","261200","2 ^ 2 ^ 2"};
+        int[] check = {87,24,1,167,0,261200,16};
         assertArrayEquals(check, Runtest.runtest(test,check.length));
         System.out.println();
     }
