@@ -34,15 +34,15 @@ public class ParserExpr {
         switch(peek) {
             case "virus" -> {
                 tkz.consume();
-                return Virus(x,y).location();
+                return GameState.location("virus",x,y);
             }
             case "antibody" -> {
                 tkz.consume();
-                return Antibody(x,y).location();
+                return GameState.location("antibody",x,y);
             }
             case "nearby" -> {
                 tkz.consume();
-                return Nearby(x,y,parseDirection());
+                return GameState.Nearby(x,y,parseDirection());
             }
         }
 

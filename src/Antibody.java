@@ -1,9 +1,9 @@
-public class Virus{
+public class Antibody {
     private int hp;
     private Pair<Integer,Integer> position;
     private String geneticcode;
 
-    public Virus(int hp,int x,int y,String geneticcode){
+    public Antibody(int hp,int x,int y,String geneticcode){
         this.hp = hp;
         this.position = new Pair(x,y);
         this.geneticcode = geneticcode;
