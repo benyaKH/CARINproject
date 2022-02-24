@@ -3,13 +3,22 @@ package Model;
 public class Antibody extends Host{
     int AntibodyPlaceCost ;
     int AntibodyMoveCost ;
-    public Antibody(int col, int row){
-        this.Xposition = col ;
-        this.Yposition = row ;
+    private Pair<Integer,Integer> position;
+    private String geneticcode;
+
+    public Antibody(int col, int row,String geneticcode){
+        this.position = new Pair<Integer,Integer>(col,row);
+        this.geneticcode = geneticcode;
     }
+
+    public Pair<Integer,Integer> getposition(){
+        return position;
+    }
+
     private void TurntoVirus(){
 
     }
+
     @Override
     public void getAttack(int dmg){
         this.HP  -= dmg ;
@@ -17,4 +26,5 @@ public class Antibody extends Host{
             this.TurntoVirus();
         }
     }
+
 }

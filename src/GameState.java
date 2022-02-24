@@ -1,11 +1,15 @@
 import java.util.LinkedList;
 
+import Model.Antibody;
+import Model.Pair;
+import Model.Virus;
+
 public class GameState {
     LinkedList<Virus> viruslist;
     LinkedList<Antibody> antibodylist;
     int[][] map;
 
-    public GameState(LinkedList virus,LinkedList antibody,int[][] map){
+    public GameState(LinkedList<Virus> virus,LinkedList<Antibody> antibody,int[][] map){
         this.viruslist = virus;
         this.antibodylist = antibody;
         this.map = map;
@@ -77,7 +81,7 @@ public class GameState {
         return 0;
     }
 
-    public double findD(Pair a){
-        return Math.sqrt(Math.pow((double) a.fst,2)+Math.pow((double) a.snd,2));
+    public double findD(Pair<Integer,Integer> a){
+        return Math.sqrt(Math.pow((double) a.fst(),2)+Math.pow((double) a.snd(),2));
     }
 }

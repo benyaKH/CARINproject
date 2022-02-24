@@ -1,3 +1,4 @@
+package Model;
 public class Pair<T1, T2> {
     protected T1 fst;
     protected T2 snd;
