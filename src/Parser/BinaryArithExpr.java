@@ -1,5 +1,7 @@
 package Parser;
 
+import java.util.Map;
+
 public class BinaryArithExpr implements Expr{
     private final Expr left;
     private final Expr right;
@@ -12,9 +14,9 @@ public class BinaryArithExpr implements Expr{
     }
 
     @Override
-    public int eval() throws EvalError {
-        int lv = left.eval();
-        int rv = right.eval();
+    public int eval(Map<String,Integer> data) throws EvalError {
+        int lv = left.eval(data);
+        int rv = right.eval(data);
         switch (op) {
             case "+":
                 return lv + rv;

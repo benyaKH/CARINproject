@@ -1,19 +1,17 @@
 package Parser;
 import java.util.Map;
 
-public class Variable implements Expr{
+public class Identifier implements Expr{
     private String name;
-    private Map<String,Integer> data;
 
-    public Variable(String name,Map<String,Integer> data) {
+    public Identifier(String name) {
         this.name = name;
-        this.data = data;
     }
 
-    public int eval() {
+    public int eval(Map<String,Integer> data) {
         if (data.containsKey(name))
             return data.get(name);
-        throw new EvalError("undefined variable: " + name);
+        throw new EvalError("undefined Identifier: " + name);
     }
     public void prettyPrint(StringBuilder s) {
     s.append(name);

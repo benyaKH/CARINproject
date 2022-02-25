@@ -60,6 +60,10 @@ public class TokenizerExpr implements Tokenizer{
         return src.length();
     }
 
+    public boolean empty(){
+        return src.isEmpty();
+    }
+
     private boolean isSpace(char c) {
         return c == ' ';
     }
