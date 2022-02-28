@@ -4,17 +4,12 @@ import java.util.*;
 
 public class ParserExpr {
     private TokenizerExpr tkz;
-    private Map<String,Integer> data = new HashMap<>();
     private Program program;
     private static final Set<String> reservedWords = new HashSet<>(Arrays.asList(
             "down", "downleft", "downright", "left", "right",
             "up", "upleft", "upright", "virus", "antibody",
             "while", "else", "if", "shoot", "then", "move", "nearby"
     ));
-
-    public ParserExpr(String src) throws SyntaxError {
-        this.tkz = new TokenizerExpr(src);
-    }
 
     public boolean isNumber(String s){
         try{
@@ -23,6 +18,12 @@ public class ParserExpr {
         }catch (NumberFormatException e){
             return false;
         }
+    }
+
+    public Program parse(String src) throws SyntaxError {
+        this.tkz = new TokenizerExpr(src);
+        program = parseProgram();
+        return program;
     }
 
     // Program → Statement+
@@ -36,7 +37,7 @@ public class ParserExpr {
     }
 
     // Statement → Command | BlockStatement | ifStatement | WhileStatement
-    private Statement parseStatement() throws SyntaxError {
+    private Expr parseStatement() throws SyntaxError {
         String this_peek = tkz.peek();
         return switch (this_peek) {
             case "{" -> parseBlockStatement();          //BlockStatement
@@ -47,7 +48,7 @@ public class ParserExpr {
     }
 
     // Command → AssignmentStatement | ActionCommand
-    private Statement parseCommand() throws SyntaxError {
+    private Expr parseCommand() throws SyntaxError {
         String this_peek = tkz.peek();
         // token.consume();
         if (this_peek.equals("move") | this_peek.equals("shoot")) {
@@ -58,41 +59,41 @@ public class ParserExpr {
     }
 
     // AssignmentStatement → <identifier> = Expression
-    private Statement parseAssignmentStatement() throws SyntaxError {
-        Statement identifier = parseIdentifier();
-        tkz.consume_check("=");
-        Statement expression = parseExpr();
+    private Expr parseAssignmentStatement() throws SyntaxError {
+        Expr identifier = parseIdentifier();
+        tkz.consume("=");
+        Expr expression = parseExpr();
         return new AssignStatement(identifier, "=", expression);
     }
 
     // ActionCommand → MoveCommand | AttackCommand
-    private Statement parseActionCommand() throws SyntaxError {
+    private Expr parseActionCommand() throws SyntaxError {
         String this_peek = tkz.peek();
         if (this_peek.equals("move")) {
             return parseMoveCommand();
         } else if (this_peek.equals("shoot")) {
             return parseAttackCommand();
         } else {
-            throw new SyntaxError();
+            throw new SyntaxError("Syntax Error");
         }
     }
 
     // MoveCommand → move Direction
-    private Statement parseMoveCommand() throws SyntaxError {
+    private Expr parseMoveCommand() throws SyntaxError {
         String this_peek = tkz.peek();
-        tkz.consume_check("move");
+        tkz.consume("move");
         if (this_peek.equals("move")) {
             return new ActionCommand("move", parseDirection());
-        } else throw new SyntaxError();
+        } else throw new SyntaxError("Syntax Error");
     }
 
     // AttackCommand → shoot Direction
-    private Statement parseAttackCommand() throws SyntaxError {
+    private Expr parseAttackCommand() throws SyntaxError {
         String this_peek = tkz.peek();
-        tkz.consume_check("shoot");
+        tkz.consume("shoot");
         if (this_peek.equals("shoot")) {
             return new ActionCommand("shoot", parseDirection());
-        } else throw new SyntaxError();
+        } else throw new SyntaxError("Syntax Error");
     }
 
 
@@ -179,9 +180,9 @@ public class ParserExpr {
         String peek = tkz.peek();
         tkz.consume();
         switch(peek) {
-            case "virus" ->  return GameState.location("virus",x,y);
-            case "antibody" -> return GameState.location("antibody",x,y);
-            case "nearby" ->  return GameState.location("nearby",x,y,parseDirection());
+            case "virus" ->  return new SensorExpr("virus");
+            case "antibody" -> return new SensorExpr("antibody");
+            case "nearby" ->  return new SensorExpr("nearby", parseDirection());
             default -> throw new SyntaxError("Syntax Error");
         }
     }
@@ -206,7 +207,7 @@ public class ParserExpr {
     private BlockStatement parseBlockStatement() throws SyntaxError {
         tkz.consume("{");
 
-        LinkedList<Statement> prossed = new LinkedList<>();
+        LinkedList<Expr> prossed = new LinkedList<>();
         while (!tkz.peek("}")) {
             prossed.add(parseStatement());
         }
@@ -216,25 +217,25 @@ public class ParserExpr {
     }
 
     // ifStatement → if (Expression) then statement  else statement
-    private Statement parseIfStatement() throws SyntaxError {
+    private Expr parseIfStatement() throws SyntaxError {
         tkz.consume("if");
         tkz.consume("(");
-        Statement Expression = parseExpr();
+        Expr Expression = parseExpr();
         tkz.consume(")");
         tkz.consume("then");
-        Statement true_statement = parseStatement();
+        Expr true_statement = parseStatement();
         tkz.consume("else");
-        Statement false_statement = parseStatement();
+        Expr false_statement = parseStatement();
 
         return new IfStatement(Expression, true_statement, false_statement);
     }
 
     // WhileStatement → while ( Expression ) Statement
-    private Statement parseWhileStatement() throws SyntaxError {
+    private Expr parseWhileStatement() throws SyntaxError {
         tkz.consume("while");
-        Statement Expression = parseExpression();
+        Expr Expression = parseExpr();
 
-        Statement true_statement = parseStatement();
+        Expr true_statement = parseStatement();
 
         return new WhileStatement(Expression, true_statement);
     }

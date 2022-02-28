@@ -1,3 +1,4 @@
+package GameState;
 import java.util.LinkedList;
 
 import Model.Antibody;

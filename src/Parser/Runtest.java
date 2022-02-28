@@ -7,20 +7,20 @@ public class Runtest {
         int count = 0;
         int[] s = new int[n];
         Map<String,Integer> data = new HashMap<>();
-        for(String o : test){
+        for(String src : test){
             try{
-                ParserExpr parser = new ParserExpr(o);
+                ParserExpr parser = new ParserExpr();
                 StringBuilder strBuild = new StringBuilder();
-                Expr sum = parser.parseExpr();
+                Expr sum = parser.parse(src);
                 sum.prettyPrint(strBuild);
                 System.out.println(strBuild+" = "+sum.eval(data));
                 s[count] = sum.eval(data);
             }catch (SyntaxError | ArithmeticException e){
-                System.out.println("[" + o + "]" + " : " + e.getMessage());
+                System.out.println("[" + src + "]" + " : " + e.getMessage());
             }catch (NoSuchElementException e){
                 System.out.println("Empty");
             }catch (EvalError e){
-                System.out.println("[" + o + "] : Incorrect operator");
+                System.out.println("[" + src + "] : Incorrect operator");
             }
             count++;
         }
