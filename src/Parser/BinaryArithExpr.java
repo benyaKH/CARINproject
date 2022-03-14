@@ -14,7 +14,7 @@ public class BinaryArithExpr implements Expr{
     }
 
     @Override
-    public int eval(Map<String,Integer> data) throws EvalError {
+    public int eval(Map<Expr,Integer> data) throws EvalError {
         int lv = left.eval(data);
         int rv = right.eval(data);
         switch (op) {
