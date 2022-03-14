@@ -1,8 +1,10 @@
 package Parser;
 
 import java.util.*;
+import Model.Host;
 
 public class ParserExpr {
+    private Host host;
     private TokenizerExpr tkz;
     private Program program;
     private static final Set<String> reservedWords = new HashSet<>(Arrays.asList(
@@ -20,7 +22,8 @@ public class ParserExpr {
         }
     }
 
-    public Program parse(String src) throws SyntaxError {
+    public Program parse(String src,Host host) throws SyntaxError {
+        this.host = host;
         this.tkz = new TokenizerExpr(src);
         program = parseProgram();
         return program;
@@ -83,7 +86,7 @@ public class ParserExpr {
         String this_peek = tkz.peek();
         tkz.consume("move");
         if (this_peek.equals("move")) {
-            return new ActionCommand("move", parseDirection());
+            return new ActionCommand(host,"move", parseDirection());
         } else throw new SyntaxError("Syntax Error");
     }
 
@@ -92,7 +95,7 @@ public class ParserExpr {
         String this_peek = tkz.peek();
         tkz.consume("shoot");
         if (this_peek.equals("shoot")) {
-            return new ActionCommand("shoot", parseDirection());
+            return new ActionCommand(host,"shoot", parseDirection());
         } else throw new SyntaxError("Syntax Error");
     }
 
@@ -180,9 +183,9 @@ public class ParserExpr {
         String peek = tkz.peek();
         tkz.consume();
         switch(peek) {
-            case "virus" ->  return new SensorExpr("virus");
-            case "antibody" -> return new SensorExpr("antibody");
-            case "nearby" ->  return new SensorExpr("nearby", parseDirection());
+            case "virus" -> {return new SensorExpr("virus");}
+            case "antibody" -> {return new SensorExpr("antibody");}
+            case "nearby" -> {return new SensorExpr("nearby", parseDirection());}
             default -> throw new SyntaxError("Syntax Error");
         }
     }
