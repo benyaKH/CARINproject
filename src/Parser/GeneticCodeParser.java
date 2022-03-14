@@ -14,13 +14,16 @@ public class GeneticCodeParser {
     Host host;
     int loopcounter;
     Random rand = new Random();
-    Map<String,Integer> data = new HashMap<>();
+    Map<Expr,Integer> data = new HashMap<>();
 
     public int evalStatement(Expr statement){
         return statement.eval(data);
     }
 
-    public String evalProgram(Program program,Host host){
-        return ;
+    public int evalProgram(Program program,Host host){
+        while(program.hasNext()){
+            evalStatement(program.nextStatement());
+        }
+        return 0;
     }
 }
