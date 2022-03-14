@@ -46,6 +46,7 @@ public class Host {
     }
     public void shoot(String direction){
         Pair<Integer,Integer> enemyPos = getDirection(this.position, direction);
-        
+        Host Enemy = Body.getHost(enemyPos.fst,enemyPos.snd);
+        Enemy.getAttack(this.ATK);
     }
 }
