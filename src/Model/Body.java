@@ -17,9 +17,9 @@ public class Body {
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
              while (true) {
-                 if(map[col][row].equals(null)){
+                 if(map[col][row]==(null)){
                      System.out.println("(col,row) = "+col+" "+row);
-                     map[col][row]= HostFactory.spawnVirus(col, row) ;
+                     map[col][row]= HostFactory.spawnVirus(col, row,"llll") ;
                      Virusleft++;
                      break;
                  }else {
@@ -32,7 +32,7 @@ public class Body {
 
      public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
-             map[col][row] = HostFactory.spawnAntibody(col, row) ;
+             map[col][row] = HostFactory.spawnAntibody(col, row,"aaaa") ;
              Antibodyleft++;
          }else throw new SyntaxError("Wrong index") ;
      }
@@ -44,7 +44,12 @@ public class Body {
     public  void PrintMap(){
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(map[i][j].getClass() + " ");
+                if(map[i][j] == null){
+                    System.out.print("0 ");
+                }else if(map[i][j].getClass().toString().equals("class Model.Virus")){
+                    System.out.print("V ");
+                }else
+                System.out.print("A ");
             }
             System.out.println();
         }
