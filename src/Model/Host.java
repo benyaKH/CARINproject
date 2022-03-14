@@ -6,38 +6,46 @@ public class Host {
     int MaxHP ;
     int HP ;
     int ATK ;
-    int Xposition ,Yposition;
+    private Pair<Integer,Integer> position;
     public void getAttack(int dmg){
         this.HP  -= dmg ;
     }
-    public void move(String direction){
+    private Pair<Integer,Integer> getDirection(Pair<Integer,Integer> pos,String direction){
+        int fst = pos.fst ;
+        int snd = pos.snd ;
         switch (direction) {
-            case "left" -> Xposition--;
-            case "right" -> Xposition++;
-            case "down" -> Yposition++;
-            case "up" -> Yposition--;
+            case "left" -> fst--;
+            case "right" -> fst++;
+            case "down" -> snd++;
+            case "up" -> snd--;
             case "upright" -> {
-                Yposition--;
-                Xposition++;
+                snd--;
+                fst++;
             }
             case "upleft" -> {
-                Yposition--;
-                Xposition--;
+                snd--;
+                fst--;
             }
             case "downright" -> {
-                Yposition++;
-                Xposition++;
+                snd++;
+                fst++;
             }
             case "downleft" -> {
-                Yposition++;
-                Xposition--;
+                snd++;
+                fst--;
             }
         }
+        return new Pair<Integer,Integer>(fst, snd);
+    }
+    public void move(String direction){
+        Pair<Integer,Integer> NewPos = getDirection(this.position, direction);
+        this.position = NewPos ;
     }
     public boolean isDead(){
         return (HP <= 0) ;
     }
     public void shoot(String direction){
+        Pair<Integer,Integer> enemyPos = getDirection(this.position, direction);
         
     }
 }
