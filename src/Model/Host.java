@@ -2,9 +2,9 @@ package Model;
 
 
 public class Host {
-    int MaxHP ;
-    int HP ;
-    int ATK ;
+    int MaxHP  = 10;
+    int HP = 10;
+    int ATK = 10;
     private Pair<Integer,Integer> position;
     public void getAttack(int dmg){
         this.HP  -= dmg ;
