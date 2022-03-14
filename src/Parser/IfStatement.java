@@ -2,7 +2,7 @@ package Parser;
 
 import java.util.Map;
 
-public class IfStatement {
+public class IfStatement implements Expr{
     protected Expr Expression;
     Expr true_statement;
     Expr false_statement;
