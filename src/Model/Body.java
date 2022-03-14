@@ -19,7 +19,7 @@ public class Body {
              while (true) {
                  if(map[col][row].equals(null)){
                      System.out.println("(col,row) = "+col+" "+row);
-                     map[col][row]= HostFactory.spawnVirus(col, row, geneticcode) ;
+                     map[col][row]= HostFactory.spawnVirus(col, row) ;
                      Virusleft++;
                      break;
                  }else {
@@ -32,7 +32,7 @@ public class Body {
 
      public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
-             map[col][row] = HostFactory.spawnAntibody(col, row, geneticcode) ;
+             map[col][row] = HostFactory.spawnAntibody(col, row) ;
              Antibodyleft++;
          }else throw new SyntaxError("Wrong index") ;
      }
@@ -40,16 +40,16 @@ public class Body {
     public static Host getHost(int col,int row){
         return map[col][row] ;
     }
-    to see result in map
+    // to see result in map
     public  void PrintMap(){
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                System.out.print(map[i][j] + " ");
+                System.out.print(map[i][j].getClass() + " ");
             }
             System.out.println();
         }
     }
-    test
+    // test
     public static void main(String[] args) throws SyntaxError {
         Body A = new Body();
         A.PrintMap();
