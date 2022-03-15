@@ -2,9 +2,14 @@ package Model;
 
 import Parser.SyntaxError;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Body {
+    int m = ConfigGame.map_m ;
+    int n = ConfigGame.map_n ;
+    List<Pair<Pair<Integer,Integer>,Host>> a = new ArrayList<Pair<Pair<Integer,Integer>,Host>>() ;
     static Host[][] map  = new Host[5][5];
     int Antibodycredit  ;
     int Antibodyleft ;
@@ -16,24 +21,19 @@ public class Body {
          if(percentspaw<70){
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
-             while (true) {
-                 if(map[col][row]==(null)){
-                     System.out.println("(col,row) = "+col+" "+row);
-                     map[col][row]= HostFactory.spawnVirus(col, row,"llll") ;
-                     Virusleft++;
-                     break;
-                 }else {
-                     col++;
-                 }
-                 System.out.println("(col,row) = "+col+" "+row);
+             System.out.println("(col,row) = "+col+" "+row);
+             Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
+             a.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnVirus(col, row,"llll") ));
+             Virusleft++;
+             System.out.println("(col,row) = "+col+" "+row);
              }
-         }
+         
      }
 
      public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
-             map[col][row] = HostFactory.spawnAntibody(col, row,"aaaa") ;
-             Antibodyleft++;
+            Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
+            a.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnAntibody(col, row,"llll") ));
          }else throw new SyntaxError("Wrong index") ;
      }
 
@@ -42,14 +42,9 @@ public class Body {
     }
     // to see result in map
     public  void PrintMap(){
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if(map[i][j] == null){
-                    System.out.print("0 ");
-                }else if(map[i][j].getClass().toString().equals("class Model.Virus")){
-                    System.out.print("V ");
-                }else
-                System.out.print("A ");
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print("0 ");
             }
             System.out.println();
         }
