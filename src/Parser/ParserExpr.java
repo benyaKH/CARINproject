@@ -202,7 +202,6 @@ public class ParserExpr {
 
     private Expr parseSensor() throws SyntaxError {
         String peek = tkz.peek();
-        tkz.consume();
         switch(peek) {
             case "virus" -> {return new SensorExpr("virus");}
             case "antibody" -> {return new SensorExpr("antibody");}
@@ -216,6 +215,7 @@ public class ParserExpr {
     private Expr parseIdentifier() throws SyntaxError {
         String peek = tkz.peek();
         tkz.consume();
+        // tkz.consume();
         if (reservedWords.contains(peek)) {
             throw new SyntaxError("Syntax Error");
         }else if(peek.chars().allMatch(Character::isLetterOrDigit)) {

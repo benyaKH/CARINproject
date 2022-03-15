@@ -61,7 +61,7 @@ public class TokenizerExpr implements Tokenizer{
     }
 
     public boolean empty(){
-        return src.isEmpty();
+        return next.equals("");
     }
 
     private boolean isSpace(char c) {
