@@ -9,9 +9,10 @@ import java.util.Random;
 public class Body {
     int m = ConfigGame.map_m ;
     int n = ConfigGame.map_n ;
+    float SpawRate = ConfigGame.virus_spawn_rate ;
     List<Pair<Pair<Integer,Integer>,Host>> a = new ArrayList<Pair<Pair<Integer,Integer>,Host>>() ;
     static Host[][] map  = new Host[5][5];
-    int Antibodycredit  ;
+    int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
     int Virusleft ;
      public void Spaw(){
