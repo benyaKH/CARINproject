@@ -22,7 +22,7 @@ public class ReadGeneticCode {
         //     else break;
         // }
         // src = "if (10 % 10 - 7) then move upleft";
-        src = " virusLoc = virus ";
+        src = " virusLoc = 50 ";
         RGC.evaluate(src,host);
 
         //myReader.close();

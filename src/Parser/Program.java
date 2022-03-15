@@ -5,17 +5,19 @@ import java.util.*;
 
 public class Program{
     LinkedList<Expr> statementlist = new LinkedList<>();
+    Iterator<Expr> itr;
 
     public void addStatement(Expr statement){
         statementlist.add(statement);
+        itr = statementlist.iterator();
     }
 
     public Expr nextStatement(){
-        return statementlist.iterator().next();
+        return itr.next();
     }
 
     public boolean hasNext(){
-        return statementlist.iterator().hasNext();
+        return itr.hasNext();
     }
 
     public void resetIterator(){

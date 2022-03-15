@@ -14,9 +14,12 @@ public class GeneticCodeParser {
     Host host;
     int loopcounter;
     Random rand = new Random();
-    Map<Expr,Integer> data = new HashMap<>();
+    Map<String,Integer> data = new HashMap<>();
 
     public int evalStatement(Expr statement){
+        StringBuilder strBuild = new StringBuilder();
+        statement.prettyPrint(strBuild);
+        System.out.println(strBuild);
         return statement.eval(data);
     }
 
@@ -24,6 +27,7 @@ public class GeneticCodeParser {
         while(program.hasNext()){
             evalStatement(program.nextStatement());
         }
+        System.out.println(data.get("virusLoc"));
         return 0;
     }
 }
