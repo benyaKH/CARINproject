@@ -12,7 +12,7 @@ public class WhileStatement implements Expr{
     }
 
     @Override
-    public int eval(Map<Expr,Integer> data){
+    public int eval(Map<String,Integer> data){
         while (Expression.eval(data) == 0) {
             true_statement.eval(data);
         }
