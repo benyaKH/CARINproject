@@ -1,8 +1,8 @@
 package Model;
 
 public class Antibody extends Host{
-    int AntibodyPlaceCost ;
-    int AntibodyMoveCost ;
+    int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
+    int AntibodyMoveCost = ConfigGame.move_cost;
     private Pair<Integer,Integer> position;
     private String geneticcode;
 
