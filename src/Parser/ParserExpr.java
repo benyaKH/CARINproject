@@ -84,10 +84,14 @@ public class ParserExpr {
 
     // AssignmentStatement → <identifier> = Expression
     private Expr parseAssignmentStatement() throws SyntaxError {
-        Expr identifier = parseIdentifier();
+        String identifier = tkz.consume();
         tkz.consume("=");
         Expr expression = parseExpr();
-        return new AssignStatement(identifier, "=", expression);
+        if (reservedWords.contains(identifier)) {
+            throw new SyntaxError("Syntax Error");
+        }else if(identifier.chars().allMatch(Character::isLetterOrDigit)) {
+            return new AssignStatement(identifier, "=", expression);
+        }else throw new SyntaxError("Syntax Error");
     }
 
     // ActionCommand → MoveCommand | AttackCommand
