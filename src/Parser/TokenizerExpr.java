@@ -23,7 +23,7 @@ public class TokenizerExpr implements Tokenizer{
                 for (pos++; pos < src.length() && Character.isDigit(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
                 break;
-            }else if (c == '+' || c == '-' || c == '(' || c == '*' || c == '/' || c == '%' || c == '^' || c == ')') {
+            }else if (c == '=' || c == '+' || c == '-' || c == '(' || c == '*' || c == '/' || c == '%' || c == '^' || c == ')') {
                 s.append(c);
                 pos++;
                 break;
