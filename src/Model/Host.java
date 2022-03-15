@@ -48,5 +48,7 @@ public class Host {
         Pair<Integer,Integer> enemyPos = getDirection(this.position, direction);
         Host Enemy = Body.getHost(enemyPos.fst,enemyPos.snd);
         Enemy.getAttack(this.ATK);
+        HP = HP + gain ;
+        if(HP>MaxHP) HP = MaxHP ;
     }
 }
