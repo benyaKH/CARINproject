@@ -10,7 +10,7 @@ public class BlockStatement implements Expr{
     }
 
     @Override
-    public int eval(Map<Expr,Integer> data) {
+    public int eval(Map<String,Integer> data) {
         Iterator itr = prossed.listIterator();
         while(itr.hasNext()){
             Expr statement = (Expr) itr.next();

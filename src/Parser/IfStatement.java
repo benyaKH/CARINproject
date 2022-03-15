@@ -15,7 +15,7 @@ public class IfStatement implements Expr{
     }
 
     @Override
-    public int eval(Map<Expr,Integer> data){
+    public int eval(Map<String,Integer> data){
         if(Expression.eval(data) == 0){
             check = true;
             return true_statement.eval(data);

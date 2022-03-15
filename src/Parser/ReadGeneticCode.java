@@ -22,9 +22,10 @@ public class ReadGeneticCode {
         //     else break;
         // }
         // src = "if (10 % 10 - 7) then move upleft";
-        src = "virusLoc = virus";
+        src = " virusLoc = virus ";
         RGC.evaluate(src,host);
-        myReader.close();
+
+        //myReader.close();
     }
 
     public String readfile(String filename){
