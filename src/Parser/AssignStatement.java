@@ -3,10 +3,10 @@ package Parser;
 import java.util.Map;
 
 public class AssignStatement implements Expr{
-    private final Expr identifier;
+    private final String identifier;
     private final String op;
     private final Expr expression;
-    AssignStatement(Expr identifier,String op,Expr expression){
+    AssignStatement(String identifier,String op,Expr expression){
         this.identifier = identifier;
         this.op = op;
         this.expression = expression;
@@ -16,7 +16,7 @@ public class AssignStatement implements Expr{
     public int eval(Map<String,Integer> data) throws EvalError {
         switch (op) {
             case "=" ->{
-                data.put(identifier.toString(),expression.eval(data));
+                data.put(identifier,expression.eval(data));
                 return 0;
             }
         }
@@ -25,7 +25,7 @@ public class AssignStatement implements Expr{
 
     @Override
     public void prettyPrint(StringBuilder s) {
-        s.append(identifier.toString());
+        s.append(identifier);
         s.append(op);
         expression.prettyPrint(s);
     }
