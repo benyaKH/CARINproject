@@ -8,7 +8,7 @@ public class Identifier implements Expr{
         this.name = name;
     }
 
-    public int eval(Map<Expr,Integer> data) {
+    public int eval(Map<String,Integer> data) {
         if (data.containsKey(name))
             return data.get(name);
         throw new EvalError("undefined Identifier: " + name);

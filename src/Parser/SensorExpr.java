@@ -21,17 +21,20 @@ public class SensorExpr implements Expr{
     }
 
     @Override
-    public int eval(Map<Expr,Integer> data){
+    public int eval(Map<String,Integer> data){
         switch(name){
             case "virus" ->{}
             case "antibody" ->{}
             case "nearby" ->{}
         }
-        return 0;
+        return ans;
     }
 
     @Override
     public void prettyPrint(StringBuilder s) {
+        s.append(name);
+        s.append("=");
+        s.append(ans);
     }
 
 }

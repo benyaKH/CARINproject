@@ -15,7 +15,7 @@ public class ActionCommand implements Expr{
     }
 
     @Override
-    public int eval(Map<Expr,Integer> data){
+    public int eval(Map<String,Integer> data){
         switch(command){
             case "move" -> host.move(direction);
             case "shoot" -> host.shoot(direction);
@@ -25,5 +25,8 @@ public class ActionCommand implements Expr{
 
     @Override
     public void prettyPrint(StringBuilder s) {
+        s.append(host);
+        s.append(command);
+        s.append(direction);
     }
 }

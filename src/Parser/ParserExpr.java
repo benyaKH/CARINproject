@@ -13,6 +13,27 @@ public class ParserExpr {
             "while", "else", "if", "shoot", "then", "move", "nearby"
     ));
 
+    /**
+     * Program → Statement+
+     * Statement → Command | BlockStatement | IfStatement | WhileStatement
+     * Command → AssignmentStatement | ActionCommand
+     * AssignmentStatement → <identifier> = Expression
+     * ActionCommand → MoveCommand | AttackCommand
+     * MoveCommand → move Direction
+     * AttackCommand → shoot Direction
+     * Direction → left | right | up | down | upleft | upright | downleft | downright
+     * BlockStatement → { Statement* }
+     * IfStatement → if ( Expression ) then Statement else Statement
+     * WhileStatement → while ( Expression ) Statement
+     * Expression → Expression + Term | Expression - Term | Term
+     * Term → Term * Factor | Term / Factor | Term % Factor | Factor
+     * Factor → Power ^ Factor | Power
+     * Power → <number> | <identifier> | ( Expression ) | SensorExpression
+     * SensorExpression → virus | antibody | nearby Direction
+     *
+     * @throws SyntaxError
+     */
+
     public boolean isNumber(String s){
         try{
             Integer.parseInt(s);
@@ -197,11 +218,8 @@ public class ParserExpr {
         tkz.consume();
         if (reservedWords.contains(peek)) {
             throw new SyntaxError("Syntax Error");
-        }else if (!isNumber("" + peek.charAt(0))) {
-            // If after this_peak[0] are alphanumeric
-            if (peek.substring(1).chars().allMatch(Character::isLetterOrDigit)) {
-                return new Identifier(peek);
-            }
+        }else if(peek.chars().allMatch(Character::isLetterOrDigit)) {
+            return new Identifier(peek);
         }
         throw new SyntaxError("Syntax Error");
     }
