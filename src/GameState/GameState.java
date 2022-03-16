@@ -5,15 +5,29 @@ import Model.Antibody;
 import Model.Pair;
 import Model.Virus;
 
-public class GameState {
+public class GameState{
     LinkedList<Virus> viruslist;
     LinkedList<Antibody> antibodylist;
-    int[][] map;
+    public Pair<Integer,Integer> map;
 
-    public GameState(LinkedList<Virus> virus,LinkedList<Antibody> antibody,int[][] map){
-        this.viruslist = virus;
-        this.antibodylist = antibody;
+    public GameState(Pair<Integer,Integer> map){
         this.map = map;
+    }
+
+    public LinkedList<Virus> getViruslist(){
+        return viruslist;
+    }
+
+    public LinkedList<Antibody> getAntibodylist(){
+        return antibodylist;
+    }
+
+    public void addVirus(Virus virus){
+        viruslist.add(virus);
+    }
+
+    public void addAntibody(Antibody antibody){
+        antibodylist.add(antibody);
     }
     
     public int location(String name,int x,int y){
