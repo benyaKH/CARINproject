@@ -1,6 +1,7 @@
 package Parser;
 
 import java.util.NoSuchElementException;
+import java.util.regex.Pattern;
 
 public class TokenizerExpr implements Tokenizer{
     private String src;
@@ -23,13 +24,13 @@ public class TokenizerExpr implements Tokenizer{
                 for (pos++; pos < src.length() && Character.isDigit(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
                 break;
-            }else if (c == '(' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^' || c == ')') {
+            }else if (c == '(' || c == '=' || c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^' || c == ')' || c == '{' || c == '}') {
                 s.append(c);
                 pos++;
                 break;
-            }else if (Character.isLetter(c)){ 
+            }else if (isCharacter(c)){ 
                 s.append(c);
-                for (pos++; pos < src.length() && Character.isLetter(src.charAt(pos)); pos++)
+                for (pos++; pos < src.length() && isCharacter(src.charAt(pos)); pos++)
                     s.append(src.charAt(pos));
                 break;
             }else if (isSpace(c))
@@ -40,28 +41,19 @@ public class TokenizerExpr implements Tokenizer{
 
     }
 
+    private boolean isCharacter(char ch) {
+        return Pattern.matches("[a-zA-z]", new StringBuilder(1).append(ch));
+    }
+
     public boolean peek(String s){
-        if(!src.isEmpty()) return peek().equals(s);
-        return false;
+        return peek().equals(s);
     }
 
     public void consume(String s) throws SyntaxError {
         if(peek(s)) {
             consume();
         }else
-            throw new SyntaxError("Syntax Error");
-    }
-
-    public int getPos(){
-        return pos;
-    }
-
-    public int getLength(){
-        return src.length();
-    }
-
-    public boolean empty(){
-        return next.equals("");
+            throw new SyntaxError(peek());
     }
 
     private boolean isSpace(char c) {
@@ -73,7 +65,10 @@ public class TokenizerExpr implements Tokenizer{
     @Override
     public String consume() throws SyntaxError {
         String result = next;
-        computeNext();
+        if (pos < src.length())
+            computeNext();
+        else
+            next = "";
         return result;
     }
 }

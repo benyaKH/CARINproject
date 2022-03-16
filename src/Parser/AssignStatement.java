@@ -14,11 +14,11 @@ public class AssignStatement implements Expr{
 
     @Override
     public int eval(Map<String,Integer> data) throws EvalError {
+        if(!data.containsKey(identifier)){ // set default value
+            data.put(identifier,0);
+        }
         switch (op) {
             case "=" ->{
-                if(data.containsKey(identifier)){ // set default value
-                    data.put(identifier,0);
-                }else
                 data.put(identifier,expression.eval(data));
                 return 0;
             }

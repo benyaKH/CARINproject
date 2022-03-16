@@ -21,7 +21,7 @@ public class GeneticCodeParser {
         while(program.hasNext()){
             evalStatement(program.nextStatement());
         }
-        System.out.println(data.get("virusLoc"));
+        System.out.println(data.get("t"));
         return "finish";
     }
 }

@@ -9,7 +9,6 @@ public class Program{
 
     public void addStatement(Expr statement){
         statementlist.add(statement);
-        itr = statementlist.iterator();
     }
 
     public Expr nextStatement(){
@@ -20,7 +19,11 @@ public class Program{
         return itr.hasNext();
     }
 
+    public void Iterator(){
+        itr = statementlist.iterator();
+    }
+
     public void resetIterator(){
-        statementlist.clear();
+        itr = null;
     }
 }
