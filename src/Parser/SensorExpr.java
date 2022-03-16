@@ -2,31 +2,29 @@ package Parser;
 
 import java.util.Map;
 
+import Model.Host;
+
+
 public class SensorExpr implements Expr{
     String name;
     String direction;
-        int ans = 0;
-        int count = 0;
-        int temp = 0;
-        int a;
-        int b;
+    Host host;
+    int ans;
 
-    public SensorExpr(String name){
+    public SensorExpr(String name,Host host){
         this.name = name;
+        this.host = host;
     }
 
-    public SensorExpr(String name,String direction){
+    public SensorExpr(String name,String direction,Host host){
         this.name = name;
         this.direction = direction;
+        this.host = host;
     }
 
     @Override
     public int eval(Map<String,Integer> data){
-        switch(name){
-            case "virus" ->{}
-            case "antibody" ->{}
-            case "nearby" ->{}
-        }
+        ans = host.gameState.location(name,host.getPosition().fst(),host.getPosition().snd());
         return ans;
     }
 
