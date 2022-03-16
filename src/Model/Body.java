@@ -46,6 +46,7 @@ public class Body {
             Antibody a_antibody = HostFactory.spawnAntibody(col, row,"llll") ;
             map.put(a_antibody.getposition(),a_antibody);
             Antibodycredit = Antibodycredit-AntibodyPlaceCost ;
+            Antibodyleft++;
          }else throw new SyntaxError("Wrong index") ;
      }
      public  void MoveAntibody(int Oldcol,int Oldrow,int Newcol,int Newrow) throws SyntaxError {
