@@ -16,7 +16,7 @@ public class IfStatement implements Expr{
 
     @Override
     public int eval(Map<String,Integer> data){
-        if(Expression.eval(data) == 0){
+        if(Expression.eval(data) != 0){
             check = true;
             return true_statement.eval(data);
         }else return false_statement.eval(data);
@@ -26,9 +26,15 @@ public class IfStatement implements Expr{
     public void prettyPrint(StringBuilder s) {
         s.append("if");
         Expression.prettyPrint(s);
+        s.append("{");
         if(check){
+            s.append("then ");
             true_statement.prettyPrint(s);
         }
-        else false_statement.prettyPrint(s);
+        else {
+            s.append("else ");
+            false_statement.prettyPrint(s);
+        }
+        s.append("}");
     }
 }
