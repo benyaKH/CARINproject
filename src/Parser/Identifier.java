@@ -20,6 +20,8 @@ public class Identifier implements Expr{
         throw new EvalError("undefined Identifier: " + name);
     }
     public void prettyPrint(StringBuilder s) {
-    s.append(name);
+        s.append("(");
+        s.append(name);
+        s.append(")");
   }
 }
