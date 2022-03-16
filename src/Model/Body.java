@@ -10,8 +10,8 @@ public class Body {
     int m = ConfigGame.map_m ;
     int n = ConfigGame.map_n ;
     float SpawRate = ConfigGame.virus_spawn_rate ;
-    List<Pair<Pair<Integer,Integer>,Host>> a = new ArrayList<Pair<Pair<Integer,Integer>,Host>>() ;
-    static Host[][] map  = new Host[5][5];
+    List<Pair<Pair<Integer,Integer>,Host>> map = new ArrayList<Pair<Pair<Integer,Integer>,Host>>() ;
+    static Host [][] a = new Host[5][5];
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
     int Virusleft ;
@@ -23,8 +23,8 @@ public class Body {
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
              System.out.println("(col,row) = "+col+" "+row);
-             Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
-             a.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnVirus(col, row,"llll") ));
+             Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
+             map.add(new Pair<Pair<Integer,Integer>,Host>(a_virus.getposition(),a_virus));
              Virusleft++;
              System.out.println("(col,row) = "+col+" "+row);
              }
@@ -34,12 +34,12 @@ public class Body {
      public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
             Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
-            a.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnAntibody(col, row,"llll") ));
+            map.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnAntibody(col, row,"llll") ));
          }else throw new SyntaxError("Wrong index") ;
      }
 
     public static Host getHost(int col,int row){
-        return map[col][row] ;
+        return a[col][row] ;
     }
     // to see result in map
     public  void PrintMap(){
