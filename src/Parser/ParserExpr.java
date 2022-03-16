@@ -84,9 +84,9 @@ public class ParserExpr {
 
     // AssignmentStatement → <identifier> = Expression
     private Expr parseAssignmentStatement() throws SyntaxError {
-        String identifier = tkz.consume();
+        String identifier = tkz.consume()     ;   
         tkz.consume("=");
-        Expr expression = parseExpr();
+        Expr expression = parseE();
         if (reservedWords.contains(identifier)) {
             throw new SyntaxError("Syntax Error");
         }else if(identifier.chars().allMatch(Character::isLetterOrDigit)) {
@@ -165,7 +165,6 @@ public class ParserExpr {
     private Expr parseF() throws SyntaxError {
         Expr f = parseP();
         String peek = tkz.peek();
-        tkz.consume();
         switch (peek) {
             case "^" -> f = new BinaryArithExpr(f, "^", parseP());
         }
