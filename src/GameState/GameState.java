@@ -92,8 +92,8 @@ public class GameState{
                 return ans;
             }
             case "nearby" -> {
-                int virus;
-                int antibody;
+                int virusloc;
+                int antibodyloc;
                 for(Virus v : viruslist){
                     a = (int) v.getposition().fst() - x;
                     b = (int) v.getposition().snd() - y;
@@ -117,7 +117,7 @@ public class GameState{
                         count++;
                     }
                 }
-                virus = ans;
+                virusloc = ans;
 
                 for(Antibody A : antibodylist){
                     a = (int) A.getposition().fst() - x;
@@ -142,10 +142,10 @@ public class GameState{
                         count++;
                     }
                 }
-                antibody = ans;
+                antibodyloc = ans;
 
-                if(virus/10 >= antibody/10) return virus;
-                else return antibody;
+                if(virusloc/10 >= antibodyloc/10) return virusloc;
+                else return antibodyloc;
             }
         }
 
