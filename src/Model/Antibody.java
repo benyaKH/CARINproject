@@ -1,5 +1,7 @@
 package Model;
 
+import Parser.SyntaxError;
+
 public class Antibody extends Host{
     int MaxHP = ConfigGame.antibody_maxHP ;
     int HP = ConfigGame.antibody_maxHP ;
@@ -18,12 +20,12 @@ public class Antibody extends Host{
         return position;
     }
 
-    private void TurntoVirus(){
-
+    private void TurntoVirus() throws SyntaxError{
+        Body.Addvirus(position.fst,position.snd) ;
     }
 
     @Override
-    public void getAttack(int dmg){
+    public void getAttack(int dmg) throws SyntaxError{
         this.HP  -= dmg ;
         if(isDead()){
             this.TurntoVirus();

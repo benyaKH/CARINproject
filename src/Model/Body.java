@@ -13,7 +13,7 @@ public class Body {
     static Host [][] a = new Host[5][5];
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
-    int Virusleft ;
+    static int Virusleft ;
     int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
     int AntibodyMoveCost = ConfigGame.move_cost;
      public void Spaw(){
@@ -31,7 +31,7 @@ public class Body {
              }
          
      }
-     public  void Addvirus(int col,int row) throws SyntaxError {
+     public static  void Addvirus(int col,int row) throws SyntaxError {
         if(col<6&&row<6){
             Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
             map.put(a_virus.getposition(),a_virus);

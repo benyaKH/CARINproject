@@ -1,5 +1,6 @@
 package Model;
 
+import Parser.SyntaxError;
 
 public class Host {
     int MaxHP ;
@@ -7,7 +8,7 @@ public class Host {
     int ATK ;
     int gain ;
     private Pair<Integer,Integer> position;
-    public void getAttack(int dmg){
+    public void getAttack(int dmg) throws SyntaxError{
         this.HP  -= dmg ;
     }
     private Pair<Integer,Integer> getDirection(Pair<Integer,Integer> pos,String direction){
@@ -44,7 +45,7 @@ public class Host {
     public boolean isDead(){
         return (HP <= 0) ;
     }
-    public void shoot(String direction){
+    public void shoot(String direction) throws SyntaxError{
         Pair<Integer,Integer> enemyPos = getDirection(this.position, direction);
         Host Enemy = Body.getHost(enemyPos.fst,enemyPos.snd);
         Enemy.getAttack(this.ATK);
