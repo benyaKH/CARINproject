@@ -14,7 +14,6 @@ public class GeneticCodeParser {
         StringBuilder strBuild = new StringBuilder();
         statement.prettyPrint(strBuild);
         System.out.println(strBuild);
-        data.put("t",0);
         return statement.eval(data);
     }
 
