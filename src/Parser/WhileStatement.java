@@ -13,7 +13,7 @@ public class WhileStatement implements Expr{
 
     @Override
     public int eval(Map<String,Integer> data){
-        while (Expression.eval(data) == 0) {
+        while (Expression.eval(data) != 0) {
             true_statement.eval(data);
         }
         return 0;
@@ -21,5 +21,8 @@ public class WhileStatement implements Expr{
 
     @Override
     public void prettyPrint(StringBuilder s) {
+        s.append("while");
+        Expression.prettyPrint(s);
+        true_statement.prettyPrint(s);
     }
 }
