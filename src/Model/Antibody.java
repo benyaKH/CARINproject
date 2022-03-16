@@ -1,8 +1,6 @@
 package Model;
 
 public class Antibody extends Host{
-    int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
-    int AntibodyMoveCost = ConfigGame.move_cost;
     int MaxHP = ConfigGame.antibody_maxHP ;
     int HP = ConfigGame.antibody_maxHP ;
     int ATK = ConfigGame.antibody_atk ;
