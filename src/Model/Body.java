@@ -3,14 +3,16 @@ package Model;
 import Parser.SyntaxError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 public class Body {
     int m = ConfigGame.map_m ;
     int n = ConfigGame.map_n ;
     float SpawRate = ConfigGame.virus_spawn_rate ;
-    List<Pair<Pair<Integer,Integer>,Host>> map = new ArrayList<Pair<Pair<Integer,Integer>,Host>>() ;
+    Map<Pair<Integer,Integer>,Host> map = new HashMap<Pair<Integer,Integer>,Host>() ;
     static Host [][] a = new Host[5][5];
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
@@ -26,7 +28,7 @@ public class Body {
              int row = rand.nextInt(5);
              System.out.println("(col,row) = "+col+" "+row);
              Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
-             map.add(new Pair<Pair<Integer,Integer>,Host>(a_virus.getposition(),a_virus));
+             map.put(a_virus.getposition(),a_virus);
              Virusleft++;
              System.out.println("(col,row) = "+col+" "+row);
              }
@@ -34,42 +36,66 @@ public class Body {
      }
      public  void Addvirus(int col,int row) throws SyntaxError {
         if(col<6&&row<6){
-           Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
-           map.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnVirus(col, row,"llll") ));
+            Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
+            map.put(a_virus.getposition(),a_virus);
+            Virusleft++;
         }else throw new SyntaxError("Wrong index") ;
     }
-     public  void AddAntibody(int col,int row) throws SyntaxError {
+    public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
-            Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
-            map.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnAntibody(col, row,"llll") ));
+            Antibody a_antibody = HostFactory.spawnAntibody(col, row,"llll") ;
+            map.put(a_antibody.getposition(),a_antibody);
+            Antibodycredit = Antibodycredit-AntibodyPlaceCost ;
          }else throw new SyntaxError("Wrong index") ;
      }
+     public  void MoveAntibody(int Oldcol,int Oldrow,int Newcol,int Newrow) throws SyntaxError {
+        if(Oldcol<m && Oldrow<n&&Newcol<m && Newrow<n){
+            Pair<Integer,Integer> Oldpos = new Pair<Integer,Integer>(Oldcol, Oldrow) ;
+           Pair<Integer,Integer> Newpos = new Pair<Integer,Integer>(Newcol, Newrow) ;
+           Antibody a = (Antibody) map.get(Oldpos);
+           map.remove(Oldpos) ;
+           a.setPos(Newpos);
+           map.put(Newpos, a) ;
+           Antibodycredit = Antibodycredit-AntibodyMoveCost ;
+        }else throw new SyntaxError("Wrong index") ;
+    }
 
     public static Host getHost(int col,int row){
         return a[col][row] ;
     }
     // to see result in map
     public  void PrintMap(){
+        String[][] mmmm = new String[m][n] ;
+        for(Pair<Integer,Integer> i :map.keySet()){
+            if(map.get(i).getClass().toString().equals("class Model.Virus"))
+            mmmm[i.fst][i.snd] = "V" ;
+            else
+            mmmm[i.fst][i.snd] = "A" ;
+
+        }
+        System.out.println("Antibodycredit = "+Antibodycredit);
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.print("0 ");
+                if(mmmm[i][j]==null) System.out.print("0 ") ;
+                else
+                System.out.print(mmmm[i][j]+" ");
             }
             System.out.println();
         }
     }
     // test
     public static void main(String[] args) throws SyntaxError {
-        // Body A = new Body();
-        // A.PrintMap();
-        // for(int i = 0;i<10;i++){
-        //      A.Spaw() ;
-        //     A.PrintMap();
-        //     System.out.println(A.Virusleft);
-        // }
-        //  A.AddAntibody(4,4);
-        // A.PrintMap();
-        // System.out.println("Model.Virus = "+A.Virusleft);
-        // System.out.println("Model.Antibody = "+A.Antibodyleft);
-        
+        Body A = new Body();
+        A.PrintMap();
+        for(int i = 0;i<10;i++){
+             A.Spaw() ;
+            A.PrintMap();
+            System.out.println(A.Virusleft);
+        }
+         A.AddAntibody(4,4);
+        A.PrintMap();
+        System.out.println("Model.Virus = "+A.Virusleft);
+        System.out.println("Model.Antibody = "+A.Antibodyleft);
+
     }
 }
