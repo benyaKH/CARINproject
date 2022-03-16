@@ -164,12 +164,10 @@ public class ParserExpr {
     // F → F ^ P | P
     private Expr parseF() throws SyntaxError {
         Expr f = parseP();
-        while (tkz.peek("^")) {
-            String peek = tkz.peek();
-            tkz.consume();
-            switch (peek) {
-                case "^" -> f = new BinaryArithExpr(f, "^", parseP());
-            }
+        String peek = tkz.peek();
+        tkz.consume();
+        switch (peek) {
+            case "^" -> f = new BinaryArithExpr(f, "^", parseP());
         }
         return f;
     }

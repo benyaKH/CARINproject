@@ -9,33 +9,29 @@ import Model.Host;
 public class ReadGeneticCode {
     GeneticCodeParser evaluator = new GeneticCodeParser();
     ParserExpr parser = new ParserExpr();
+    StringBuilder strBuild = new StringBuilder();
     static Scanner myReader;
 
     public static void main(String[] args) {
         Host host = new Host();
         ReadGeneticCode RGC = new ReadGeneticCode();
-        String src;
-        // for(int i=0; i <= 10; i++){
-        //     src = RGC.readfile("./src/Parser/GeneticCode.txt");
-        //     if(src != null)
-        //     RGC.evaluate(src,host);
-        //     else break;
-        // }
-        // src = "if (10 % 10 - 7) then move upleft";
-        src = " virusLoc = 50 ";
+        //String src = RGC.readfile("./src/Parser/GeneticCode.txt");
+        String src = "t = t + 1";
         RGC.evaluate(src,host);
+        //src = "if (10 % 10 - 7) then move upleft";
+        //RGC.evaluate(src,host);
 
-        //myReader.close();
+        myReader.close();
     }
 
     public String readfile(String filename){
         try {
             File myObj = new File(filename);
             myReader = new Scanner(myObj);
-            if (myReader.hasNextLine()) {
-              String src = myReader.nextLine();
-              return src;
-            }else return null;
+            while (myReader.hasNextLine()) {
+              strBuild.append(myReader.nextLine());
+            }
+            return strBuild.toString();
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
