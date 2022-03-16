@@ -15,6 +15,8 @@ public class Body {
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
     int Virusleft ;
+    int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
+    int AntibodyMoveCost = ConfigGame.move_cost;
      public void Spaw(){
          Random rand = new Random() ;
          int percentspaw = rand.nextInt(100);
