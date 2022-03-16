@@ -84,7 +84,7 @@ public class ParserExpr {
     // AssignmentStatement → <identifier> = Expression
     private Expr parseAssignmentStatement() throws SyntaxError {
         String identifier = tkz.consume();
-        tkz.consume();
+        tkz.consume("=");
         Expr expression = parseE();
         if (reservedWords.contains(identifier)) {
             throw new SyntaxError("Syntax Error");
