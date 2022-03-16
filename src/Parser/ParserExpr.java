@@ -196,9 +196,9 @@ public class ParserExpr {
         String peek = tkz.peek();
         tkz.consume();
         switch(peek) {
-            case "virus" -> {return new SensorExpr("virus");}
-            case "antibody" -> {return new SensorExpr("antibody");}
-            case "nearby" -> {return new SensorExpr("nearby", parseDirection());}
+            case "virus" -> {return new SensorExpr("virus", host);}
+            case "antibody" -> {return new SensorExpr("antibody", host);}
+            case "nearby" -> {return new SensorExpr("nearby", parseDirection(), host);}
             default -> throw new SyntaxError("Syntax Error");
         }
     }
