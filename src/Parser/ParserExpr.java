@@ -156,7 +156,6 @@ public class ParserExpr {
     private Expr parseF() throws SyntaxError {
         Expr f = parseP();
         String peek = tkz.peek();
-        tkz.consume();
         switch (peek) {
             case "^" -> f = new BinaryArithExpr(f, "^", parseP());
         }

@@ -32,7 +32,12 @@ public class Body {
              }
          
      }
-
+     public  void Addvirus(int col,int row) throws SyntaxError {
+        if(col<6&&row<6){
+           Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
+           map.add(new Pair<Pair<Integer,Integer>,Host>(pos,HostFactory.spawnVirus(col, row,"llll") ));
+        }else throw new SyntaxError("Wrong index") ;
+    }
      public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
             Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
@@ -54,16 +59,17 @@ public class Body {
     }
     // test
     public static void main(String[] args) throws SyntaxError {
-        Body A = new Body();
-        A.PrintMap();
-        for(int i = 0;i<10;i++){
-             A.Spaw() ;
-            A.PrintMap();
-            System.out.println(A.Virusleft);
-        }
-         A.AddAntibody(4,4);
-        A.PrintMap();
-        System.out.println("Model.Virus = "+A.Virusleft);
-        System.out.println("Model.Antibody = "+A.Antibodyleft);
+        // Body A = new Body();
+        // A.PrintMap();
+        // for(int i = 0;i<10;i++){
+        //      A.Spaw() ;
+        //     A.PrintMap();
+        //     System.out.println(A.Virusleft);
+        // }
+        //  A.AddAntibody(4,4);
+        // A.PrintMap();
+        // System.out.println("Model.Virus = "+A.Virusleft);
+        // System.out.println("Model.Antibody = "+A.Antibodyleft);
+        
     }
 }
