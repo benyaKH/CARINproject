@@ -1,5 +1,6 @@
 package Model;
 
+import GameState.GameState;
 
 public class Host {
     int MaxHP ;
@@ -7,6 +8,8 @@ public class Host {
     int ATK ;
     int gain ;
     private Pair<Integer,Integer> position;
+    public GameState gameState;
+
     public void getAttack(int dmg){
         this.HP  -= dmg ;
     }
@@ -50,5 +53,11 @@ public class Host {
         Enemy.getAttack(this.ATK);
         HP = HP + gain ;
         if(HP>MaxHP) HP = MaxHP ;
+    }
+    public void addGameState(GameState gameState){
+        this.gameState = gameState;
+    }
+    public Pair<Integer,Integer> getPosition(){
+        return position;
     }
 }
