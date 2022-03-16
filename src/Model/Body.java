@@ -1,10 +1,7 @@
 package Model;
 
 import Parser.SyntaxError;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -12,7 +9,7 @@ public class Body {
     int m = ConfigGame.map_m ;
     int n = ConfigGame.map_n ;
     float SpawRate = ConfigGame.virus_spawn_rate ;
-    Map<Pair<Integer,Integer>,Host> map = new HashMap<Pair<Integer,Integer>,Host>() ;
+    static Map<Pair<Integer,Integer>,Host> map = new HashMap<Pair<Integer,Integer>,Host>() ;
     static Host [][] a = new Host[5][5];
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
@@ -62,7 +59,8 @@ public class Body {
     }
 
     public static Host getHost(int col,int row){
-        return a[col][row] ;
+        Pair<Integer,Integer> pos = new Pair<Integer,Integer>(col, row) ;
+        return map.get(pos); 
     }
     // to see result in map
     public  void PrintMap(){
@@ -93,10 +91,11 @@ public class Body {
             A.PrintMap();
             System.out.println(A.Virusleft);
         }
-         A.AddAntibody(4,4);
+        A.Addvirus(4, 3);
+        A.AddAntibody(4,4);
         A.PrintMap();
-        System.out.println("Model.Virus = "+A.Virusleft);
-        System.out.println("Model.Antibody = "+A.Antibodyleft);
+        System.out.println("Virusleft = "+A.Virusleft);
+        System.out.println("Antibodyleft = "+A.Antibodyleft);
 
     }
 }

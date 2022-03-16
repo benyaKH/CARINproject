@@ -11,6 +11,7 @@ public class Antibody extends Host{
     public Antibody(int col, int row,String geneticcode){
         this.position = new Pair<Integer,Integer>(col,row);
         this.geneticcode = geneticcode;
+
     }
 
     public Pair<Integer,Integer> getposition(){
