@@ -1,16 +1,21 @@
 package Model;
 
+import java.util.Random;
+
+import GameState.GameState;
+
 public class Antibody extends Host{
-    int MaxHP = ConfigGame.antibody_maxHP ;
-    int HP = ConfigGame.antibody_maxHP ;
-    int ATK = ConfigGame.antibody_atk ;
-    int gain = ConfigGame.antibody_gain ;
     private Pair<Integer,Integer> position;
     private String geneticcode;
 
-    public Antibody(int col, int row,String geneticcode){
+    public Antibody(int col, int row,String geneticcode,GameState gameState){
         this.position = new Pair<Integer,Integer>(col,row);
         this.geneticcode = geneticcode;
+        MaxHP = ConfigGame.virus_maxHP ;
+        HP = ConfigGame.virus_maxHP ;
+        ATK = ConfigGame.virus_atk ;
+        gain = ConfigGame.virus_gain ;
+        this.gameState = gameState;
     }
 
     public Pair<Integer,Integer> getposition(){
@@ -18,7 +23,10 @@ public class Antibody extends Host{
     }
 
     private void TurntoVirus(){
-
+        HostFactory hf = new HostFactory();
+        Random rand = new Random();
+        Virus virus = hf.spawnVirus(rand.nextInt(gameState.map.fst()), rand.nextInt(gameState.map.snd()), gameState);
+        gameState.addVirus(virus);
     }
 
     @Override
@@ -29,4 +37,7 @@ public class Antibody extends Host{
         }
     }
 
+    public String getGeneticcode(){
+        return geneticcode;
+    }
 }
