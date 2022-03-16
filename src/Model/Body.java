@@ -20,7 +20,7 @@ public class Body {
          Random rand = new Random() ;
          int percentspaw = rand.nextInt(100);
          System.out.println("Percent = "+percentspaw);
-         if(percentspaw<70){
+         if(percentspaw>(SpawRate*100)){
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
              System.out.println("(col,row) = "+col+" "+row);
