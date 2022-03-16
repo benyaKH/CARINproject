@@ -14,6 +14,7 @@ public class GeneticCodeParser {
         StringBuilder strBuild = new StringBuilder();
         statement.prettyPrint(strBuild);
         System.out.println(strBuild);
+        data.put("t",0);
         return statement.eval(data);
     }
 
@@ -21,7 +22,7 @@ public class GeneticCodeParser {
         while(program.hasNext()){
             evalStatement(program.nextStatement());
         }
-        System.out.println(data.get("virusLoc"));
+        System.out.println(data.get("t"));
         return "finish";
     }
 }

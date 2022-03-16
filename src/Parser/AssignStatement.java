@@ -16,9 +16,6 @@ public class AssignStatement implements Expr{
     public int eval(Map<String,Integer> data) throws EvalError {
         switch (op) {
             case "=" ->{
-                if(data.containsKey(identifier)){ // set default value
-                    data.put(identifier,0);
-                }else
                 data.put(identifier,expression.eval(data));
                 return 0;
             }

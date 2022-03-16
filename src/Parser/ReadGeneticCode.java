@@ -8,7 +8,7 @@ import Model.Host;
 
 public class ReadGeneticCode {
     GeneticCodeParser evaluator = new GeneticCodeParser();
-    ParserExpr parser = new ParserExpr();
+    ParserExpr parser;
     StringBuilder strBuild = new StringBuilder();
     static Scanner myReader;
 
@@ -16,12 +16,14 @@ public class ReadGeneticCode {
         Host host = new Host();
         ReadGeneticCode RGC = new ReadGeneticCode();
         //String src = RGC.readfile("./src/Parser/GeneticCode.txt");
-        String src = "t = t + 1";
-        RGC.evaluate(src,host);
+        String src = "t = 0 + 1";
+        try {
+            RGC.evaluate(src,host);
+        } catch (SyntaxError e) {
+            e.printStackTrace();
+        }
         //src = "if (10 % 10 - 7) then move upleft";
         //RGC.evaluate(src,host);
-
-        myReader.close();
     }
 
     public String readfile(String filename){
@@ -31,6 +33,7 @@ public class ReadGeneticCode {
             while (myReader.hasNextLine()) {
               strBuild.append(myReader.nextLine());
             }
+            myReader.close();
             return strBuild.toString();
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
@@ -39,13 +42,9 @@ public class ReadGeneticCode {
         return null;
     }
 
-    public String evaluate(String src,Host host){
-        Program program = new Program();
-        try {
-            program = parser.parse(src, host);
-        } catch (SyntaxError e) {
-            e.printStackTrace();
-        }
+    public String evaluate(String src,Host host) throws SyntaxError{
+        parser = new ParserExpr(src, host);
+        Program program = parser.parseProgram();
         System.out.println(evaluator.evalProgram(program, host));
         return "true";
     }

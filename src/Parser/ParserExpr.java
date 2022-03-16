@@ -43,20 +43,19 @@ public class ParserExpr {
         }
     }
 
-    public Program parse(String src,Host host) throws SyntaxError {
+    public ParserExpr(String src,Host host) throws SyntaxError {
         this.host = host;
         this.tkz = new TokenizerExpr(src);
-        program = parseProgram();
-        return program;
     }
 
     // Program → Statement+
 
-    private Program parseProgram() throws SyntaxError {
+    public Program parseProgram() throws SyntaxError {
         Program program = new Program();
-        while (!tkz.empty()) {
+        while (!tkz.peek("")) {
             program.addStatement(parseStatement());
         }
+        program.Iterator();
         return program;
     }
 
@@ -85,8 +84,8 @@ public class ParserExpr {
     // AssignmentStatement → <identifier> = Expression
     private Expr parseAssignmentStatement() throws SyntaxError {
         String identifier = tkz.consume();
-        tkz.consume("=");
-        Expr expression = parseExpr();
+        tkz.consume();
+        Expr expression = parseE();
         if (reservedWords.contains(identifier)) {
             throw new SyntaxError("Syntax Error");
         }else if(identifier.chars().allMatch(Character::isLetterOrDigit)) {
@@ -122,14 +121,6 @@ public class ParserExpr {
         if (this_peek.equals("shoot")) {
             return new ActionCommand(host,"shoot", parseDirection());
         } else throw new SyntaxError("Syntax Error");
-    }
-
-
-    private Expr parseExpr() throws SyntaxError {
-        Expr v = parseE();
-        if (tkz.getPos() < tkz.getLength())
-            throw new SyntaxError("Syntax Error");
-        return v;
     }
 
     // E → E + T | E - T | T
@@ -243,7 +234,7 @@ public class ParserExpr {
     private Expr parseIfStatement() throws SyntaxError {
         tkz.consume("if");
         tkz.consume("(");
-        Expr Expression = parseExpr();
+        Expr Expression = parseE();
         tkz.consume(")");
         tkz.consume("then");
         Expr true_statement = parseStatement();
@@ -256,7 +247,7 @@ public class ParserExpr {
     // WhileStatement → while ( Expression ) Statement
     private Expr parseWhileStatement() throws SyntaxError {
         tkz.consume("while");
-        Expr Expression = parseExpr();
+        Expr Expression = parseE();
 
         Expr true_statement = parseStatement();
 
