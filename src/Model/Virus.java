@@ -1,19 +1,26 @@
 package Model;
 
-public class Virus extends Host{
-    int MaxHP = ConfigGame.virus_maxHP ;
-    int HP = ConfigGame.virus_maxHP ;
-    int ATK = ConfigGame.virus_atk ;
-    int gain = ConfigGame.virus_gain ;
-    private Pair<Integer,Integer> position;
-    private String geneticcode;
+import GameState.GameState;
 
-    public Virus(int col,int row,String geneticcode){
+public class Virus extends Host{
+    private Pair<Integer,Integer> position ;
+    private String geneticcode ;
+
+    public Virus(int col,int row,String geneticcode,GameState gameState){
         this.position = new Pair<Integer,Integer>(col,row);
         this.geneticcode = geneticcode;
+        MaxHP = ConfigGame.virus_maxHP ;
+        HP = ConfigGame.virus_maxHP ;
+        ATK = ConfigGame.virus_atk ;
+        gain = ConfigGame.virus_gain ;
+        this.gameState = gameState;
     }
 
     public Pair<Integer,Integer> getposition(){
         return position;
+    }
+
+    public String getGeneticcode(){
+        return geneticcode;
     }
 }
