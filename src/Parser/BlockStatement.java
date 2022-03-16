@@ -11,9 +11,9 @@ public class BlockStatement implements Expr{
 
     @Override
     public int eval(Map<String,Integer> data) {
-        Iterator itr = prossed.listIterator();
+        Iterator<Expr> itr = prossed.iterator();
         while(itr.hasNext()){
-            Expr statement = (Expr) itr.next();
+            Expr statement = itr.next();
             statement.eval(data);
         }
         return 0;
