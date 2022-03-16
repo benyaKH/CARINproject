@@ -15,15 +15,12 @@ public class ReadGeneticCode {
     public static void main(String[] args) {
         Host host = new Host();
         ReadGeneticCode RGC = new ReadGeneticCode();
-        //String src = RGC.readfile("./src/Parser/GeneticCode.txt");
-        String src = "t = 0 + 1";
+        String src = RGC.readfile("./src/Parser/GeneticCode.txt");
         try {
             RGC.evaluate(src,host);
         } catch (SyntaxError e) {
             e.printStackTrace();
         }
-        //src = "if (10 % 10 - 7) then move upleft";
-        //RGC.evaluate(src,host);
     }
 
     public String readfile(String filename){
@@ -31,7 +28,7 @@ public class ReadGeneticCode {
             File myObj = new File(filename);
             myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
-              strBuild.append(myReader.nextLine());
+              strBuild.append(" "+myReader.nextLine());
             }
             myReader.close();
             return strBuild.toString();
@@ -45,7 +42,8 @@ public class ReadGeneticCode {
     public String evaluate(String src,Host host) throws SyntaxError{
         parser = new ParserExpr(src, host);
         Program program = parser.parseProgram();
-        System.out.println(evaluator.evalProgram(program, host));
+        evaluator.evalProgram(program, host);
+        //System.out.println(evaluator.evalProgram(program, host));
         return "true";
     }
 }

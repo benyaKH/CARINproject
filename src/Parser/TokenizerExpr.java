@@ -50,7 +50,6 @@ public class TokenizerExpr implements Tokenizer{
     }
 
     public void consume(String s) throws SyntaxError {
-        System.out.println("con "+s+"-");
         if(peek(s)) {
             consume();
         }else
