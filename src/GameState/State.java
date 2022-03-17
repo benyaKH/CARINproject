@@ -1,5 +1,7 @@
 package GameState;
 
+import Parser.SyntaxError;
+
 public interface State {
-    void render();
+    State render() throws SyntaxError;
 }

@@ -5,12 +5,12 @@ import java.util.Scanner;
 import Model.Body;
 import Parser.SyntaxError;
 
-public class Defaltstate {
+public class Defaltstate implements State{
     Body body ;
     public Defaltstate(Body body){
         this.body = body ;
     }
-    public void render() throws SyntaxError{
+    public State render() throws SyntaxError{
         Scanner console = new Scanner(System.in);
         System.out.println("Time unit = "+ body.time);
         body.PrintMap(); 
@@ -27,7 +27,8 @@ public class Defaltstate {
         }else if(choice.equals("S")){
 
         }
-        
+        body.time++;
+        return new Defaltstate(this.body) ;
     }
     
 }
