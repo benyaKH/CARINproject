@@ -16,6 +16,7 @@ public class Body {
     static int Virusleft ;
     int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
     int AntibodyMoveCost = ConfigGame.move_cost;
+    public int time = 0 ;
      public void Spaw(){
          Random rand = new Random() ;
          int percentspaw = rand.nextInt(100);
@@ -24,7 +25,7 @@ public class Body {
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
              System.out.println("(col,row) = "+col+" "+row);
-             Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
+             Virus a_virus = HostFactory.spawnVirus(col, row) ;
              map.put(a_virus.getposition(),a_virus);
              Virusleft++;
              System.out.println("(col,row) = "+col+" "+row);
@@ -33,14 +34,14 @@ public class Body {
      }
      public static  void Addvirus(int col,int row) throws SyntaxError {
         if(col<6&&row<6){
-            Virus a_virus = HostFactory.spawnVirus(col, row,"llll") ;
+            Virus a_virus = HostFactory.spawnVirus(col, row) ;
             map.put(a_virus.getposition(),a_virus);
             Virusleft++;
         }else throw new SyntaxError("Wrong index") ;
     }
     public  void AddAntibody(int col,int row) throws SyntaxError {
          if(col<6&&row<6){
-            Antibody a_antibody = HostFactory.spawnAntibody(col, row,"llll") ;
+            Antibody a_antibody = HostFactory.spawnAntibody(col, row) ;
             map.put(a_antibody.getposition(),a_antibody);
             Antibodycredit = Antibodycredit-AntibodyPlaceCost ;
             Antibodyleft++;
