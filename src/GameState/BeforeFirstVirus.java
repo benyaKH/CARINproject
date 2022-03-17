@@ -32,7 +32,7 @@ public class BeforeFirstVirus implements State{
             int Nrow = console.nextInt() ;
             body.MoveAntibody(Ocol, Orow, Ncol, Nrow);
         }else if(choice.equals("S")){
-            return  new StartState() ;
+
         }else if(choice.equals("R")){
             return  new StartState() ;
         }
