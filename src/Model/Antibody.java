@@ -39,9 +39,6 @@ public class Antibody extends Host{
             this.TurntoVirus();
         }
     }
-    public void setPos(Pair<Integer,Integer> newPos){
-        this.position = newPos ;
-    }
 
     public String getGeneticcode(){
         return geneticcode;

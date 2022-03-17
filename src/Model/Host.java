@@ -61,4 +61,7 @@ public class Host {
     public Pair<Integer,Integer> getPosition(){
         return position;
     }
+    public void setPos(Pair<Integer,Integer> newPos){
+        this.position = newPos ;
+    }
 }
