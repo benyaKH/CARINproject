@@ -20,4 +20,13 @@ public class Pair<T1, T2> {
     public String toString() {
         return "(" + fst + ", " + snd + ")";
     }
+    public boolean equals(Pair<T1,T2> f){
+        return (f.fst.equals(this.fst)&&f.snd.equals(this.snd));
+    }
+    public static void main(String[] args) {
+        Pair<Integer,Integer> a = new Pair<Integer,Integer>(4, 4);
+        Pair<Integer,Integer> b = new Pair<Integer,Integer>(4, 4);
+        System.out.println(a.equals(b));
+
+    }
 }
