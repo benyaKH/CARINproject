@@ -43,22 +43,31 @@ public class Body {
         }else throw new SyntaxError("Wrong index") ;
     }
     public  void AddAntibody(int col,int row) throws SyntaxError {
-         if(col<6&&row<6){
-            Antibody a_antibody = HostFactory.spawnAntibody(col, row) ;
-            map.put(a_antibody.getposition(),a_antibody);
-            Antibodycredit = Antibodycredit-AntibodyPlaceCost ;
-            Antibodyleft++;
-         }else throw new SyntaxError("Wrong index") ;
+        if(Antibodycredit<AntibodyPlaceCost){
+            System.out.println("You don't have enough credit!!!");
+        }else{
+            if(col<6&&row<6){
+                Antibody a_antibody = HostFactory.spawnAntibody(col, row) ;
+                map.put(a_antibody.getposition(),a_antibody);
+                Antibodycredit = Antibodycredit-AntibodyPlaceCost ;
+                Antibodyleft++;
+             }else throw new SyntaxError("Wrong index") ;
+
+        }
      }
      public  void MoveAntibody(int Oldcol,int Oldrow,int Newcol,int Newrow) throws SyntaxError {
         if(Oldcol<m && Oldrow<n&&Newcol<m && Newrow<n){
             Pair<Integer,Integer> Oldpos = new Pair<Integer,Integer>(Oldcol, Oldrow) ;
            Pair<Integer,Integer> Newpos = new Pair<Integer,Integer>(Newcol, Newrow) ;
-           Antibody a = (Antibody) map.get(Oldpos);
-           map.remove(Oldpos) ;
-           a.setPos(Newpos);
-           map.put(Newpos, a) ;
-           Antibodycredit = Antibodycredit-AntibodyMoveCost ;
+           Antibody a =  (Antibody) map.get(new Pair<Integer,Integer>(Oldcol, Oldrow));
+           if(a.HP<AntibodyPlaceCost){
+               System.out.println("This Antibody doesn't have enough HP!!!");
+           }else{
+            map.remove(Oldpos) ;
+            a.setPos(Newpos);
+            map.put(Newpos, a) ;
+            a.HP = a.HP-AntibodyPlaceCost ;
+           }
         }else throw new SyntaxError("Wrong index") ;
     }
 
