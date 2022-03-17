@@ -10,7 +10,6 @@ public class Body {
     int n = ConfigGame.map_n ;
     float SpawRate = ConfigGame.virus_spawn_rate ;
     static Map<Pair<Integer,Integer>,Host> map = new HashMap<Pair<Integer,Integer>,Host>() ;
-    static Host [][] a = new Host[5][5];
     int Antibodycredit = ConfigGame.intitial_credits;
     int Antibodyleft ;
     static int Virusleft ;
@@ -59,15 +58,24 @@ public class Body {
         if(Oldcol<m && Oldrow<n&&Newcol<m && Newrow<n){
             Pair<Integer,Integer> Oldpos = new Pair<Integer,Integer>(Oldcol, Oldrow) ;
            Pair<Integer,Integer> Newpos = new Pair<Integer,Integer>(Newcol, Newrow) ;
-           Antibody a =  (Antibody) map.get(new Pair<Integer,Integer>(Oldcol, Oldrow));
-           if(a.HP<AntibodyPlaceCost){
-               System.out.println("This Antibody doesn't have enough HP!!!");
-           }else{
-            map.remove(Oldpos) ;
-            a.setPos(Newpos);
-            map.put(Newpos, a) ;
-            a.HP = a.HP-AntibodyPlaceCost ;
-           }
+           Antibody anti = null  ;
+           for(Pair<Integer,Integer> i :map.keySet()){
+               if(i.equals(Oldpos)){
+                   anti = (Antibody) map.get(i) ;
+                   Oldpos = i ;
+                   break ;
+               }
+            }
+            if(anti != null){
+                if(anti.HP<AntibodyMoveCost){
+                    System.out.println("This Antibody doesn't have enough HP!!!");
+                }else{
+                 map.remove(Oldpos) ;
+                 anti.setPos(Newpos);
+                 anti.HP = anti.HP-AntibodyPlaceCost ;
+                 map.put(Newpos,anti) ;
+                }
+            }else throw new SyntaxError("no such an element") ;
         }else throw new SyntaxError("Wrong index") ;
     }
 
