@@ -17,11 +17,14 @@ public class Body {
     int AntibodyPlaceCost = ConfigGame.atb_place_cost ;
     int AntibodyMoveCost = ConfigGame.move_cost;
     public int time = 0 ;
+    public int getVirusleft(){
+        return Virusleft ;
+    }
      public void Spaw(){
          Random rand = new Random() ;
          int percentspaw = rand.nextInt(100);
          System.out.println("Percent = "+percentspaw);
-         if(percentspaw>(SpawRate*100)){
+         if(percentspaw<(SpawRate*100)){
              int col = rand.nextInt(5);
              int row = rand.nextInt(5);
              System.out.println("(col,row) = "+col+" "+row);
