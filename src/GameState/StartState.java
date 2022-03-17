@@ -7,8 +7,8 @@ import Parser.SyntaxError;
 
 public class StartState implements State{
     Body body ;
-    public StartState(Body body){
-        this.body = body ;
+    public StartState(){
+        this.body = new Body() ;
     }
     public State render() throws SyntaxError{
         String c ;
@@ -18,7 +18,7 @@ public class StartState implements State{
             c = console.next();
         }while(c.equals("n")) ;
         if(c.equals("Y")){
-            return new Defaltstate(this.body) ;
+            return new BeforeFirstVirus(this.body) ;
         }else throw new SyntaxError("this ans undefined") ;
     }
 }

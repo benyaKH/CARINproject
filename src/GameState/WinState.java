@@ -11,6 +11,6 @@ public class WinState implements State{
         System.out.println("=============="); 
         System.out.println("   YOU WINS!    ");      
         System.out.println("==============");   
-        return  new StartState(this.body) ;    
+        return  new StartState() ;    
     }
 }

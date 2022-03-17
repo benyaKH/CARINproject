@@ -19,6 +19,6 @@ public class GameOverState implements State{
             Scanner console = new Scanner(System.in);
             c = console.next();
         }while(c.equals("n")) ;
-        return  new StartState(this.body) ;           
+        return  new StartState() ;           
     }
 }

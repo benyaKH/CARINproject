@@ -1,13 +1,11 @@
 package GameState;
 
-import Model.Body;
 import Parser.SyntaxError;
 
 public class Webpage {
-    Body body = new Body();
     State s ;
     public Webpage(){
-        s = new StartState(this.body) ;
+        s = new StartState() ;
     }
     public void render() throws SyntaxError{
         s = s.render() ;
